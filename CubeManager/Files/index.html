@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <link href="style.css" rel="stylesheet">
+        <title>Demo apppppp</title>
+        <script type="text/javascript" src="jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="parts.js"></script>
+        <script type="text/javascript" src="partsEnums.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+        <script>
+            function dragResize(edge){
+                overwolf.windows.getCurrentWindow(function(result){
+                    if (result.status=="success"){
+                        overwolf.windows.dragResize(result.window.id, edge);
+                    }
+                });
+            };
+            
+            function dragMove(){
+                overwolf.windows.getCurrentWindow(function(result){
+                    if (result.status=="success"){
+                        overwolf.windows.dragMove(result.window.id);
+                    }
+                });
+            };
+            
+            function closeWindow(){
+                overwolf.windows.getCurrentWindow(function(result){
+                    if (result.status=="success"){
+                        overwolf.windows.close(result.window.id);
+                    }
+                });
+            };
+
+            overwolf.games.events.onError.addListener(
+                function (value) {
+                    console.log('error');
+                }
+                );
+
+               overwolf.games.events.onInfoUpdates.addListener(
+                function (value) {
+                 console.log('onInfoUpdates');
+                }
+                );
+               overwolf.games.events.onNewEvents.addListener(
+                function (value) {
+                  console.log('onNewEaaavents');
+                });
+
+               overwolf.games.onGameInfoUpdated.addListener(
+                function (Result) {
+                  console.log('onGameInfoUpdated');
+                  console.log(Result);
+                });
+
+               function getInfo(){
+                 overwolf.games.getRunningGameInfo(function(GameInfo){
+                    console.log(GameInfo);
+                    console.log(overwolf);
+                })
+             };
+
+//overwolf.extensions.current.getManifest(function(asd){console.log(asd.meta.version)})
+// rate link
+// more from dev link
+        </script>
+    </head>
+
+    <body>
+        <a id="close" onclick="closeWindow();">X</a>
+        <div style="width:20px; height:20px; bottom:0; right:0; position:absolute; cursor:resize #important" onmousedown="dragResize('BottomRight');"></div>
+        <div id="content" onmousedown="dragMove();">
+
+           <header id="title"></header>
+            <div id="container">
+      <!--           <div id="inventory" class="scrollable">
+
+                </div> -->
+                <div id="tracker" class="scrollable">
+                    <ul></ul>
+                </div>
+                <div id="settings">
+                    SHOW TIERS: 1 2 3 4 5 6 7 8 9 10 TX<br>
+                    <input type="checkbox" id="">Seperate Cubes By Type<br>
+                    <a href="">RESET ALL DATA</a><br>
+                    <span id="copyright">Copyright? No way!<br> No Rights Reserved.<br>
+                        Version 1.0</span>
+                </div>
+                <div id="containerControls">
+                    <a href="" data-cubetype ="0">Cub</a>
+                    <a href="" data-cubetype="1">Mov</a>
+                    <a href="" data-cubetype="2">Hard</a>
+                    <a href="" data-cubetype="3">Spec</a>
+                </div>
+                <div style="width:20px; height:20px; bottom:0; right:0; position:absolute; background-color:red;" onmousedown="dragResize('BottomRight');"></div>
+            </div>
+            <div id="bottomBar">
+                <a id="inventoryButton" class="cutBottomLeft primaryButton"></a>
+                
+                <a id="settingsButton" class="secondaryButton"></a>
+                <a id="goalsButton" class="cutBottomRight primaryButton"></a>
+            </div>
+    <!--         <h1>Hello, world!</h1>
+            <p>You can drag from anywhere you want, and resize from bottom right corner.</p>
+            <textarea id="logTextArea"></textarea>
+            <button id="close" onclick="closeWindow();">Close</button>
+            <button id="close" onclick="getInfo();">Info</button> -->
+        </div>
+        <script type="text/javascript">
+//         function openInventory(){
+// $('#')
+//         }
+
+   
+
+
+
+function generateTracker(parts)
+{
+    // var countries = ['United States', 'Canada', 'Argentina', 'Armenia'];
+
+    var cList =  $('#tracker ul');
+    $.each(parts, function(i)
+    {
+        var li = $('<li/>')
+        .addClass('cubeItem')
+        // .attr('role', 'menuitem')
+        .attr('data-cubetype',parts[i].type)
+        .appendTo(cList);
+        var aaa = $('<span/>')
+        // .addClass('ui-all')
+        .text(parts[i].type)
+        .appendTo(li);
+    });
+
+};
+
+var CUBE_TYPE_STORAGE_KEY = 'cubeTypeStorageKey'
+
+        $( document ).ready(function() {
+         // $.getJSON('parts.json', function(data) {
+     APP.options.reset();
+     APP.options.load();
+
+            generateTracker(parts);
+
+$tracker = $('#tracker ul');
+
+            $cubeTypeConrols = $('[data-cubetype]');
+            $cubeTypeConrols.click(function(e){
+                e.preventDefault();
+                var cubeType = $(this).data('cubetype');
+
+                APP.options.toggleOption(APP.options.cubeTypes, cubeType);
+               updateVisibleCubeTpes();
+
+               function updateVisibleCubeTpes()
+               {
+                trackerParts = {
+                    items: [
+                    $tracker.children('li[data-cubetype="0"]'),
+                    $tracker.children('li[data-cubetype="1"]'),
+                    $tracker.children('li[data-cubetype="2"]'),
+                    $tracker.children('li[data-cubetype="3"]'),
+                    $tracker.children('li[data-cubetype="4"]')
+                    ],
+                    update: function() {
+                        for(var index in this.items){
+                            // for(var item in this.items[index] ){
+                               this.items[index].each(function(idx, val){
+                                console.log('in'+(APP.options.cubeTypes.indexOf(parseInt(index)) > -1)+'  -index'+index)
+                                 $(this).toggle(APP.options.cubeTypes.indexOf(parseInt(index)) > -1);             
+                             });
+                           // }
+                       }
+                   }
+               }
+               trackerParts.update();
+
+
+           }
+       }  );
+
+
+
+//                     console.log('----');//[data-cubetype="0"]
+//                     var stuff =  $tracker.children('li[data-cubetype="0"]');
+//                     console.log(trackerParts);
+//                     stuff.toggle();
+//                     for(asd in  $tracker.children('li[data-cubetype="0"]'))
+//                     {
+//                         console.log(asd);
+// // $element.toggle();
+//                     }
+//                 }
+//             });
+            // console.log(parts);
+// $cubeToggle  = $('#cubeToggle');
+// $movementToggle = $('#movementToggle');
+// $hardwareToggle = $('#hardwareToggle')
+// $specialToggle = $('#specialToggle');
+
+
+
+            // if(typeof selectedCubeTypes != "undefined" && selectedCubeTypes != null && selectedCubeTypes.length > 0)
+            // {
+            // }
+            // else
+            // {
+            //     selectedCubeTypes = new Array();
+            // }
+
+            // alert(data);
+            // alert('json data loaded');
+      // }).?
+      // success(function() { alert('second success'); }).
+      // error(function() { alert('error'); }).
+      // complete(function() { alert('complete'); 
+
+  });
+  // });
+      </script>
+    </body>
+</html>

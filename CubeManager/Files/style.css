@@ -1,0 +1,182 @@
+body {
+     -webkit-user-select: none;
+     cursor:default;
+  /* background-color: beige; */
+}
+
+#title
+{
+height: 20px;
+background-position-x: right;
+/* text-align: right; */
+background-repeat: no-repeat;
+background-image: url('title.png');
+color:orange;
+}
+#container
+{
+    position: absolute;
+    border: 2pt solid #f98317;
+    /*border-radius: 2px;*/
+    background-color: #282726;
+    top: 23px;
+    left: 0;
+    bottom: 50px;
+    right: 0px;
+}
+
+ul
+{
+    margin: 0;
+    padding: 0;
+}
+
+#containerControls
+{
+    position: absolute;
+bottom: 0;
+background-color: red;
+width: 100%;
+/* height: 24px; */
+padding: 4px;
+}
+
+/*Scrollbar*/
+.scrollable
+{
+    overflow-y: scroll;
+height: 97%;
+margin : 4px;
+}
+.scrollable::-webkit-scrollbar-track
+{
+    background-color: #282726;
+}
+
+.scrollable::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #282726;
+}
+
+.scrollable::-webkit-scrollbar-thumb
+{
+    background-color: #ff8511;
+}
+
+#close
+{
+
+}
+
+.countIndicator
+{
+    font-size: 14px;
+    /* width: 100%; */
+    top: 50%;
+    left: 50%;
+    position: relative;
+    background-color: rgb(148, 148, 148);
+    border-radius: 10px;
+    border-width: 32px;
+    padding: 2px;
+}
+
+.cubeItem
+{
+    width: 20px;
+background-image: url('settings.png');
+height: 20px;
+display: inline-block;
+}
+
+/*Buttons*/
+.primaryButton
+{
+    /* vertical-align: middle; */
+}
+
+.secondaryButton
+{
+    /* background-color: gray; */
+}
+
+/*Corners*/
+
+.cutBottomLeft {
+    color: red;
+    display: inline-block;
+    /* background-color:red; */
+    width: 130px;
+    height:24px;
+    text-align:center;
+
+    -webkit-clip-path: polygon(100% 0, 100% 100%, 10px 100%, 0 14px, 0 0);
+    background: no-repeat center url('inventory.png') #0984ee;
+}
+
+.cutBottomRight {
+    background: no-repeat center url('tracker.png') #0984ee;
+    display: inline-block;
+    /* background-color:red; */
+    width: 130px;
+    height:24px;
+    text-align:center;
+
+    -webkit-clip-path: polygon(100% 0, 100% 14px, 120px 100%, 0 100%, 0 0);
+}
+
+#settingsButton
+{
+background: no-repeat center url('settings.png') #7d7d7d;
+display: inline-block;
+width: 24px;
+height: 24px;
+/*padding-bottom: 7px;*/
+/* margin: 0 2px 0 2px; */
+/* display: none; */
+/* height: 32px; */
+}
+#copyright
+{
+    width: 100%;
+text-align: center;
+color: dimgrey;
+text-shadow: 0 1px rgba(0, 0, 0, 0.48);
+display: block;
+}
+
+#settingsButton:hover, #settingsButton:active
+{
+    background: no-repeat center url('settings-on.png') #fff;
+}
+
+#inventoryButton:hover, #inventoryButton:active
+{
+    background: no-repeat center url('inventory-on.png') #fff;
+}
+
+#goalsButton:hover, #goalsButton:active
+{
+    background: no-repeat center url('tracker-on.png') #fff;
+}
+
+#bottomBar
+{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 26px;
+    height: 24px;
+    /* top: 0; */
+    /* left: auto; */
+    /* margin: 0 50%; */
+}
+
+div#content {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
