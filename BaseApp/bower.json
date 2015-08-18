@@ -1,0 +1,27 @@
+{
+  "name": "RobocraftCubes",
+  "version": "1.0.0",
+  "authors": [
+    "Peter Sobkowski <peter.sobkowski@gmail.com>"
+  ],
+  "description": "A tool for generating a JSON/CSV parts list for Robocraft Cubes",
+  "main": "index.html",
+  "keywords": [
+    "Robocraft"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "backbone-amd" : null,
+    "underscore-amd" : null,
+    "requirejs" : null,
+    "requirejs-text": null
+  }
+}
